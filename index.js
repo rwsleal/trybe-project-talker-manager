@@ -3,6 +3,15 @@ const bodyParser = require('body-parser');
 const { randomBytes } = require('crypto');
 const middlewares = require('./middlewares');
 
+const validationSteps = [
+  middlewares.validateToken,
+  middlewares.validateName,
+  middlewares.validateAge,
+  middlewares.validateTalk,
+  middlewares.validateTalkDate,
+  middlewares.validateTalkRate,
+];
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -23,18 +32,9 @@ const loginValidation = [middlewares.validateEmail, middlewares.validatePassword
 
 app.post('/login', loginValidation, (_req, res) => res.status(200).json({ token }));
 
-app.post(
-  '/talker',
-  [
-    middlewares.validateToken,
-    middlewares.validateName,
-    middlewares.validateAge,
-    middlewares.validateTalk,
-    middlewares.validateTalkDate,
-    middlewares.validateTalkRate,
-  ],
-  middlewares.insertTalker,
-);
+app.post('/talker', validationSteps, middlewares.insertTalker);
+
+app.put('/talker/:id', validationSteps, middlewares.editTalker);
 
 app.listen(PORT, () => {
   console.log('Online');

@@ -9,6 +9,7 @@ const validateTalkDate = require('./validateTalkDate');
 const validateTalkRate = require('./validateTalkRate');
 const validateTalk = require('./validateTalk');
 const insertTalker = require('./insertTalker');
+const editTalker = require('./editTalker');
 
 module.exports = {
   registeredTalkers,
@@ -22,4 +23,5 @@ module.exports = {
   validateTalkRate,
   validateTalk,
   insertTalker,
+  editTalker,
 };
