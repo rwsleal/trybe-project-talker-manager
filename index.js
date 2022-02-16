@@ -36,6 +36,8 @@ app.post('/talker', validationSteps, middlewares.insertTalker);
 
 app.put('/talker/:id', validationSteps, middlewares.editTalker);
 
+app.delete('/talker/:id', middlewares.validateToken, middlewares.deleteTalker);
+
 app.listen(PORT, () => {
   console.log('Online');
 });
