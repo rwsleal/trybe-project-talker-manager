@@ -23,6 +23,19 @@ const loginValidation = [middlewares.validateEmail, middlewares.validatePassword
 
 app.post('/login', loginValidation, (_req, res) => res.status(200).json({ token }));
 
+app.post(
+  '/talker',
+  [
+    middlewares.validateToken,
+    middlewares.validateName,
+    middlewares.validateAge,
+    middlewares.validateTalk,
+    middlewares.validateTalkDate,
+    middlewares.validateTalkRate,
+  ],
+  middlewares.insertTalker,
+);
+
 app.listen(PORT, () => {
   console.log('Online');
 });
