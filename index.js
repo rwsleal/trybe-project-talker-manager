@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { randomBytes } = require('crypto');
 const middlewares = require('./middlewares');
 
 const app = express();
@@ -16,6 +17,11 @@ app.get('/', (_request, response) => {
 app.get('/talker', middlewares.registeredTalkers);
 
 app.get('/talker/:id', middlewares.talkerById);
+
+const token = randomBytes(8).toString('hex');
+const loginValidation = [middlewares.validateEmail, middlewares.validatePassword];
+
+app.post('/login', loginValidation, (_req, res) => res.status(200).json({ token }));
 
 app.listen(PORT, () => {
   console.log('Online');
