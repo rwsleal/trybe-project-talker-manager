@@ -1,8 +1,8 @@
-const fs = require('fs/promises');
+const { readFile } = require('fs/promises');
 
 module.exports = async (_req, res, next) => {
   try {
-    const talkers = await fs.readFile('./talker.json', 'utf-8');
+    const talkers = await readFile('./talker.json', 'utf-8');
   
     const parsedTalkers = JSON.parse(talkers);
   

@@ -1,3 +1,4 @@
 const registeredTalkers = require('./registeredTalkers');
+const talkerById = require('./talkerById');
 
-module.exports = { registeredTalkers };
+module.exports = { registeredTalkers, talkerById };
