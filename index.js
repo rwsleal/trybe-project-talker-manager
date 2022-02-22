@@ -23,9 +23,11 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-app.get('/talker', middlewares.registeredTalkers);
+app.get('/talker/search', middlewares.validateToken, middlewares.searchTalker);
 
 app.get('/talker/:id', middlewares.talkerById);
+
+app.get('/talker', middlewares.registeredTalkers);
 
 const token = randomBytes(8).toString('hex');
 const loginValidation = [middlewares.validateEmail, middlewares.validatePassword];
